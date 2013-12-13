@@ -15,9 +15,9 @@ repo.git.checkout()
 
 #Modify the file
 os.chdir(repo_loc)
-f = open('Carbonprice.csv','a')
+f = open('carbonprice.csv','a')
 f.write('\n')
-f.write('lets do this')
+f.write('was capitalization the issue?')
 f.close()
 
 #Stage files for commit
