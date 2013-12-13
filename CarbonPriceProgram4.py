@@ -91,12 +91,21 @@ pulltime = datetime.datetime.now()
 #send email with success or failure
 fromaddr = 'calcarbondash@gmail.com'
 toaddrs = 'tucker.willsie@cpisf.org'
-msg = "\r\n".join([
+if errorvar = "no error":
+    msg = "\r\n".join([
+        "From: Calcarbondash@gmail.com",
+        "To: Tucker.willsie@cpisf.org",
+        "Subject: Status of upload",
+        "",
+        "Upload successful - todays upload was " +str(pricevar)+", "+str(timevar[0])+ ". The time of the pull was "+str(pulltime)
+        ])
+else:
+    msg = "\r\n".join([
     "From: Calcarbondash@gmail.com",
     "To: Tucker.willsie@cpisf.org",
     "Subject: Status of upload",
     "",
-    "Upload successful - todays upload was " +str(pricevar)+", "+str(timevar[0])+ ". The time of the pull was "+str(pulltime)+" and the error status was "+errorvar
+    "Upload error - The time of the pull was "+str(pulltime)+" and the error was: "+errorvar
     ])
 
 #credentials
