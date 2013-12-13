@@ -21,7 +21,7 @@ f.write('was capitalization the issue?')
 f.close()
 
 #Stage files for commit
-repo.git.add('Carbonprice.csv')
+repo.git.add('carbonprice.csv')
 
 #Commit the changes
 repo.git.commit(m ='Latest carbon price update')
