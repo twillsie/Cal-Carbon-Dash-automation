@@ -15,7 +15,7 @@ repo.git.checkout()
 
 #Modify the file
 os.chdir(repo_loc)
-f = open('Carbon_prices.csv','a')
+f = open('Carbonprice.csv','a')
 f.write('\n')
 f.write('lets do this')
 f.close()
