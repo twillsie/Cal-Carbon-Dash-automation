@@ -23,7 +23,7 @@ repo.git.checkout()
 os.chdir(repo_loc)
 
 #create output document
-f = open('CarbonPrice.txt','a')
+f = open('CarbonPrice.csv','a')
 
 #start a new line
 f.write('\n')
@@ -120,7 +120,7 @@ server.sendmail(fromaddr, toaddrs, msg)
 server.quit()
 
 #Stage files for commit
-repo.git.add('CarbonPrice.txt')
+repo.git.add('CarbonPrice.csv')
 
 #Commit the changes
 repo.git.commit(m ='Latest carbon price update')
