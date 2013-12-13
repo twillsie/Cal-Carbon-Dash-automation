@@ -91,7 +91,7 @@ pulltime = datetime.datetime.now()
 #send email with success or failure
 fromaddr = 'calcarbondash@gmail.com'
 toaddrs = 'tucker.willsie@cpisf.org'
-if errorvar = "no error":
+if errorvar == "no error":
     msg = "\r\n".join([
         "From: Calcarbondash@gmail.com",
         "To: Tucker.willsie@cpisf.org",
