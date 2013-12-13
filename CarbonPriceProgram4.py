@@ -22,12 +22,6 @@ repo.git.checkout()
 #make sure we are in the right folder
 os.chdir(repo_loc)
 
-#create output document
-f = open('CarbonPrice.csv','a')
-
-#start a new line
-f.write('\n')
-
 #create soup
 soup = BeautifulSoup(urllib2.urlopen('https://www.theice.com/marketdata/DelayedMarkets.shtml?productId=3418&hubId=4080').read())
 table = soup.find('table', {"class":"data default borderless"})
@@ -55,8 +49,7 @@ for tr in table.find_all('tr'):
 
 
     
-f.write(str(pricevar))
-f.write(',')
+
 
 #Find and record time
 time_idx = -1
@@ -82,7 +75,12 @@ if timevar == []:
     errorvar = "Vintage wasn't found"
     timevar = ['01/01/1900']
 
+#create output document
+f = open('Carbon_Prices.csv','a')
+#f.write('\n')
 f.write(timevar[0])
+f.write(',')
+f.write(str(pricevar))
 f.close()
 
 #pull timestamp
@@ -120,7 +118,7 @@ server.sendmail(fromaddr, toaddrs, msg)
 server.quit()
 
 #Stage files for commit
-repo.git.add('CarbonPrice.csv')
+repo.git.add('Carbon_Prices.csv')
 
 #Commit the changes
 repo.git.commit(m ='Latest carbon price update')
