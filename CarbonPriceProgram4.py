@@ -76,7 +76,7 @@ if timevar == []:
     timevar = ['01/01/1900']
 
 #create output document
-f = open('Carbon_Prices.csv','a')
+f = open('carbon_prices.csv','a')
 f.write(timevar[0])
 f.write(',')
 f.write(str(pricevar))
@@ -118,7 +118,7 @@ server.sendmail(fromaddr, toaddrs, msg)
 server.quit()
 
 #Stage files for commit
-repo.git.add('Carbon_Prices.csv')
+repo.git.add('carbon_prices.csv')
 
 #Commit the changes
 repo.git.commit(m ='Latest carbon price update')
