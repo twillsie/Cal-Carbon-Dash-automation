@@ -101,12 +101,12 @@ if errorvar = "no error":
         ])
 else:
     msg = "\r\n".join([
-    "From: Calcarbondash@gmail.com",
-    "To: Tucker.willsie@cpisf.org",
-    "Subject: Status of upload",
-    "",
-    "Upload error - The time of the pull was "+str(pulltime)+" and the error was: "+errorvar
-    ])
+        "From: Calcarbondash@gmail.com",
+        "To: Tucker.willsie@cpisf.org",
+        "Subject: Status of upload",
+        "",
+        "Upload error - The time of the pull was "+str(pulltime)+" and the error was: "+errorvar
+        ])
 
 #credentials
 username = 'CalCarbonDash'
