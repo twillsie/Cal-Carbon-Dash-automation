@@ -15,13 +15,13 @@ repo.git.checkout()
 
 #Modify the file
 os.chdir(repo_loc)
-f = open('CarbonPrice.txt','a')
+f = open('Carbon_prices.csv','a')
 f.write('\n')
 f.write('lets do this')
 f.close()
 
 #Stage files for commit
-repo.git.add('CarbonPrice.txt')
+repo.git.add('Carbonprice.csv')
 
 #Commit the changes
 repo.git.commit(m ='Latest carbon price update')
