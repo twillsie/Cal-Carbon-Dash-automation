@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import datetime
 import smtplib
 
+#create var that will track errors
+errorvar = "no error"
+
 #create output document
 f = open('CarbonPrice.txt','a')
 
@@ -14,6 +17,9 @@ f.write('\n')
 soup = BeautifulSoup(urllib2.urlopen('https://www.theice.com/marketdata/DelayedMarkets.shtml?productId=3418&hubId=4080').read())
 table = soup.find('table', {"class":"data default borderless"})
 
+#throw an error unless the right price is found
+errorvar = "Vintage wasn't found"
+
 #Find and record "last" price
 price_idx = -1
 for idx, th in enumerate(table.find_all('th')):
@@ -22,14 +28,19 @@ for idx, th in enumerate(table.find_all('th')):
         price_idx = idx
         break
 
+pricevar = 0
 for tr in table.find_all('tr'):
     # Extract the content of each column in a list
     td_contents = [td.get_text() for td in tr.find_all('td')]
     # If this row matches our requirement, take the Last column
     if 'Dec13' in td_contents:
         pricevar = td_contents[price_idx]
+        errorvar = "no error"
+        break
 
-f.write(pricevar)
+
+    
+f.write(str(pricevar))
 f.write(',')
 
 #Find and record time
@@ -47,9 +58,14 @@ for tr in table.find_all('tr'):
     # If this row matches our requirement, take the Time column
     if 'Dec13' in td_contents:
         time_str = td_contents[time_idx]
-        # This will capture Thu Dec 05 16:26:24 EST 2013 GMT, convert to datetime object
+        # This will capture the date in the form: "Thu Dec 05 16:26:24 EST 2013 GMT", convert to datetime object
         time_obj = datetime.datetime.strptime(time_str,'%a %b %d %H:%M:%S EST %Y GMT')
         timevar.append(datetime.datetime.strftime(time_obj,'%x'))
+
+#if date was not found, print "1/1/1900" and record the error
+if timevar == []:
+    errorvar = "Vintage wasn't found"
+    timevar = ['01/01/1900']
 
 f.write(timevar[0])
 
@@ -64,7 +80,7 @@ msg = "\r\n".join([
     "To: Tucker.willsie@cpisf.org",
     "Subject: Status of upload",
     "",
-    "Upload successful - todays upload was " +str(pricevar)+", "+str(timevar[0])+ ". The time of the pull was "+str(pulltime)
+    "Upload successful - todays upload was " +str(pricevar)+", "+str(timevar[0])+ ". The time of the pull was "+str(pulltime)+" and the error status was "+errorvar
     ])
 
 #credentials
