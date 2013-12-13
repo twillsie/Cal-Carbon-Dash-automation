@@ -3,9 +3,24 @@ import urllib2
 from bs4 import BeautifulSoup
 import datetime
 import smtplib
+import git
+import os
 
 #create var that will track errors
 errorvar = "no error"
+
+#Define repo location & url locations
+repo = git.Repo('/users/Tucker/Documents/GitHub/Cal-Carbon-Dash-automation')
+url = "https://github.com/twillsie/Cal-Carbon-Dash-automation"
+repo_loc = '/users/Tucker/Documents/GitHub/Cal-Carbon-Dash-automation'
+    #current_repository = git.Repo.clone_from(url,repo_loc)
+
+#Update repo
+repo.git.reset()
+repo.git.checkout()
+
+#make sure we are in the right folder
+os.chdir(repo_loc)
 
 #create output document
 f = open('CarbonPrice.txt','a')
@@ -68,6 +83,7 @@ if timevar == []:
     timevar = ['01/01/1900']
 
 f.write(timevar[0])
+f.close()
 
 #pull timestamp
 pulltime = datetime.datetime.now()
@@ -87,11 +103,19 @@ msg = "\r\n".join([
 username = 'CalCarbonDash'
 password = '465California'
 
-# Send the message via Michelin SMTP server, but don't include the envelope header.
+# Send the message via SMTP server, but don't include the envelope header.
 server = smtplib.SMTP(host='smtp.gmail.com', port=587)
 server.starttls()
 server.login(username,password)
 server.sendmail(fromaddr, toaddrs, msg)
 server.quit()
 
-f.close()
+#Stage files for commit
+repo.git.add('CarbonPrice.txt')
+
+#Commit the changes
+repo.git.commit(m ='Latest carbon price update')
+
+#Push the repo
+#note: to automate login you must follow the instructions here: https://help.github.com/articles/set-up-git
+repo.git.push()
