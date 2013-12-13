@@ -77,10 +77,10 @@ if timevar == []:
 
 #create output document
 f = open('Carbon_Prices.csv','a')
-#f.write('\n')
 f.write(timevar[0])
 f.write(',')
 f.write(str(pricevar))
+f.write('\n')
 f.close()
 
 #pull timestamp
