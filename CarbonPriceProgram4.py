@@ -108,7 +108,7 @@ else:
 
 #credentials
 username = 'CalCarbonDash'
-password = '465California'
+password = 'CalCarbon123'
 
 # Send the message via SMTP server, but don't include the envelope header.
 server = smtplib.SMTP(host='smtp.gmail.com', port=587)
